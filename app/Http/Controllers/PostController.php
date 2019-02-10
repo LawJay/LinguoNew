@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Http\Controllers;
 use App\User;
 use Auth;
@@ -11,9 +11,10 @@ class PostController extends Controller
 {
 	public function getDashboard()
 	{
+		  $user = Auth::user();
 	    $users = User::paginate(5);
 		$posts = Post::orderBy('created_at', 'desc')->get();
-		return view('dashboard', ['posts' => $posts])->with(['users' => $users]);
+		return view('dashboard', ['posts' => $posts])->with(['users' => $users])->with(['user' => $user]);
 	}
 
 	public function postCreatePost(Request $request)
